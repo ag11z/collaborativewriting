@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+   
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<TableLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+ 
+>
+
+
+   <TableRow>
+
+        <TextView
+            android:id="@+id/F"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="80dp"
+            android:text="Username" />
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text" >
+
+        </EditText>
+ </TableRow>
+
+  <TableRow>
+
+        <TextView
+            android:id="@+id/G"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="80dp"
+            android:text="Password" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" >
+
+        </EditText>
+   </TableRow>
+
+  <TableRow android:gravity="center" >
+
+      <Button
+          android:id="@+id/submit"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Login" />
+
+</TableRow>
+
+  
+</TableLayout>
+</ScrollView>
