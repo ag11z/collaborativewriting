@@ -93,7 +93,11 @@ public class ViewPersonal extends Activity {
 	   public void onDrawerOpened() {
 		   Button button=(Button)findViewById(R.id.handle);
 		  // button.setText("");
+		   if (Main.black)
+			   button.setBackgroundColor(Color.BLACK);
+		   else
 		   button.setBackgroundColor(Color.WHITE);
+		   button.setText("Hide");
 		   button.setClickable(false);
 		   button.setEnabled(false);
 	   }
@@ -104,7 +108,7 @@ public class ViewPersonal extends Activity {
 	   // TODO Auto-generated method stub
 		   Button button=(Button)findViewById(R.id.handle);
 		   // TODO Auto-generated method stub
-		   
+		   button.setText("Edit");
 		   button.setVisibility(View.VISIBLE);
 	   }
 	   });

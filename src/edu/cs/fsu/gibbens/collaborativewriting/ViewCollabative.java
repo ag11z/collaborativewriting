@@ -104,6 +104,10 @@ public class ViewCollabative extends Activity {
 	   public void onDrawerOpened() {
 	   // TODO Auto-generated method stub
 		   Button button=(Button)findViewById(R.id.handle);
+		   button.setText("Hide");
+		   if (Main.black)
+			   button.setBackgroundColor(Color.BLACK);
+		   else
 		   button.setBackgroundColor(Color.WHITE);
 		   button.setClickable(false);
 		   button.setEnabled(false);
