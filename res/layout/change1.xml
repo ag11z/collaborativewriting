@@ -11,7 +11,7 @@
 >
 
 
-   <TableRow>
+   <TableRow  android:layout_marginTop="5sp" android:layout_marginBottom="5sp">
 
         <TextView
             android:id="@+id/F"
@@ -20,24 +20,26 @@
             android:layout_marginRight="80dp"
             android:text="About Me:" />
         </TableRow>
-<TableRow>
+<TableRow android:layout_marginBottom="5sp"  android:gravity="center">
         <EditText
             android:id="@+id/aboutme"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:gravity="left|top"
             android:ems="10"
+             android:background="#eee9e9"
             android:inputType="textMultiLine" >
 
         </EditText>
  </TableRow>
 
-  <TableRow>
+  <TableRow android:layout_marginBottom="5sp" android:layout_marginRight="2sp">
 
         <TextView
             android:id="@+id/G"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="80dp"
+           android:layout_weight="1"
             android:text="New password:" />
 
         <EditText
@@ -45,17 +47,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+             android:background="#eee9e9"
+            android:layout_weight="1"
             android:inputType="textPassword" >
 
         </EditText>
    </TableRow>
-     <TableRow>
+     <TableRow android:layout_marginBottom="5sp" android:layout_marginRight="2sp">
 
         <TextView
             android:id="@+id/H"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
+          
+            android:layout_weight="1"
             android:text="Confirm new password:" />
 
         <EditText
@@ -63,22 +68,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+             android:background="#eee9e9"
+            android:layout_weight="1"
             android:inputType="textPassword" >
 
         </EditText>
     </TableRow>
-    <TableRow>
+    <TableRow android:layout_marginBottom="5sp" android:layout_marginRight="2sp">
         <TextView
             android:id="@+id/D"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="80dp"
+           
+            android:layout_weight="1"
             android:text="Email  (optional)" />
 
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+             android:background="#eee9e9"
+            android:layout_weight="1"
             android:ems="10"
             android:inputType="textEmailAddress" >
 
@@ -90,13 +100,14 @@
      android:id="@+id/clear"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
+     android:layout_weight="1"
      android:text="Clear" />
 
  <Button
      android:id="@+id/submit"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-    
+    android:layout_weight="1"
      android:text="Change" />
 </TableRow>
 

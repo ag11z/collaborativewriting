@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+<TableRow>
+        <TextView
+        android:id="@+id/ida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID" />
+    <TextView
+        android:id="@+id/firsta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First" />
+
+    <TextView
+        android:id="@+id/lasta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last" />
+
+
+
+    
+</TableRow><TableRow>
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+
+</TableRow>
+  <TableRow>
+          <TextView
+        android:id="@+id/phonea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone" />
+<TextView
+        android:id="@+id/emaila"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email" />
+    <TextView
+        android:id="@+id/usera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UserName" />
+  
+  </TableRow>
+  <TableRow>
+        <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    </TableRow>
+    <TableRow>
+          <TextView
+        android:id="@+id/passa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password" />
+    <TextView
+        android:id="@+id/Gendera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender" />
+
+    <TextView
+        android:id="@+id/conutrya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Country" />
+      </TableRow>
+  
+     <TableRow> 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+    
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+      </TableRow>
+  <TableRow>
+
+<Button
+    android:id="@+id/Pre"
+   
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Previous" />
+
+<Button
+    android:id="@+id/next"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Next" />
+  </TableRow>
+  <TableRow>
+  <Button
+      android:id="@+id/delete"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Delete" />
+
+  <EditText
+      android:id="@+id/go"
+      android:layout_width="100dp"
+      android:layout_height="wrap_content"
+     
+      android:inputType="number" >
+
+      
+  </EditText>
+
+  <Button
+      android:id="@+id/Go"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Go" />
+
+  </TableRow>
+  
+</TableLayout>

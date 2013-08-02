@@ -2,6 +2,9 @@ package edu.cs.fsu.gibbens.collaborativewriting;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 
 	    import java.util.ArrayList;
@@ -35,12 +38,57 @@ import android.widget.SimpleAdapter.ViewBinder;
 	    	HashMap<String, Object> map2;
 	    	Iterator<ParseObject> x;
 	    	protected List<ParseObject> List;
+	    	protected List<ParseObject> List2;
+			private int listc;
 	    	/** Called when the activity is first created. */
 	    	
 	    	@Override
 	    	public void onCreate(Bundle savedInstanceState) {
 	    	    super.onCreate(savedInstanceState);
+	    	    if (Main.black)
+	    	    {
+	    	    	setContentView(R.layout.profileb);
+	    	    	
+	    	    }
+	    	    else
+	    	    {
 	    	    setContentView(R.layout.profile);
+	    	    
+	    	    }
+	    	    if (Main.black)
+	    	    {
+	    	    	  ListView l =(ListView) findViewById(R.id.pstories);
+	    	    	  l.setBackgroundColor(Color.BLACK);
+	    	    	listc=R.layout.storylistb;
+	    	    	int[] colors = {0xffffffff, 0xffffffff, 0xffffffff}; // red for the example
+	    	    	l.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	    	l.setDividerHeight(1);
+	    	    	
+	    	    	 ListView l1 =(ListView) findViewById(R.id.cstories);
+	    	    	  l1.setBackgroundColor(Color.BLACK);
+	    	    	
+	    	    	
+	    	    	l1.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	    	l1.setDividerHeight(1);
+	    	    	
+	    	    }
+	    	    else
+	    	    	{
+	    	    	listc=R.layout.storylist;
+	    	    	 ListView l =(ListView) findViewById(R.id.pstories);
+	    	    	  l.setBackgroundColor(Color.WHITE);
+	    	    	
+	    	    	int[] colors = {Color.BLACK, Color.BLACK, Color.BLACK}; // red for the example
+	    	    	l.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	    	l.setDividerHeight(1);
+	    	    	 ListView l1 =(ListView) findViewById(R.id.cstories);
+	    	    	  l1.setBackgroundColor(Color.WHITE);
+	    	    	
+	    	    	
+	    	    	l1.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	    	l1.setDividerHeight(1);
+	    	    	 
+	    	    	}
 	    	    TextView about =(TextView) findViewById(R.id.aboutme);
 	    	    about.setText("");
 	    	    TextView Name =(TextView) findViewById(R.id.name);
@@ -65,6 +113,7 @@ import android.widget.SimpleAdapter.ViewBinder;
 	    	    final ArrayList<HashMap<String, Object>> m_data = new ArrayList<HashMap<String, Object>>();
 
 	    	    ParseQuery<ParseObject> query1 = ParseQuery.getQuery("Story");
+	    	    query1.whereEqualTo("user", value);
 	    	    query1.whereEqualTo("entry", 0);
 	    	    query1.whereEqualTo("Personal", true);
 	    	    query1.findInBackground(new FindCallback<ParseObject>() {
@@ -72,7 +121,7 @@ import android.widget.SimpleAdapter.ViewBinder;
 	    	        public void done(List<ParseObject> scoreList, ParseException e) {
 	    	            if (e == null) {
 	    	           	 ParseObject m;
-	    	           	 List=scoreList;
+	    	           	 List2=scoreList;
 	    	           	x=scoreList.iterator();
 	    	           	
 	    	           	 String s;
@@ -97,7 +146,7 @@ import android.widget.SimpleAdapter.ViewBinder;
 	    	           	    	m1.put("checked", false);
 	    	           	 SimpleAdapter adapter = new SimpleAdapter(Profile.this,
 	    	           		        m_data,
-	    	           		                R.layout.storylist,
+	    	           		                listc,
 	    	           		                new String[] {"maintext", "subtext"}, 
 	    	           		                new int[] {R.id.StoryName, R.id.by}); 
 	    	           		        
@@ -142,44 +191,44 @@ import android.widget.SimpleAdapter.ViewBinder;
 
 	    	   	        l.setOnItemClickListener(new OnItemClickListener(){
 
-	    	   	            
-	    	   	            public void onItemClick(AdapterView<?> parent, View v, int p, long id) {
-	    	   	            	
-	    	   	    	    	 
-	    	   	            	
-	    	   	            	Bundle mBundle = new Bundle();
-	    	   	            	ParseObject m = List.get(p);
-	    	   	            	
-	    	   	            	String user=(String) m.get("user");
-	    	   	            	String name=(String) m.get("Name");
-	    	   	            	//Toast.makeText(getBaseContext(), name, Toast.LENGTH_LONG).show();
-	    	   	            	int id1=(Integer) m.get("StoryId");
-	    	   	            	mBundle.putInt("id",id1 );
-	    	   	            	mBundle.putString("user",user);
-	    	   	            	mBundle.putString("name", name);
-	    	   	            	
-	    	   	            	Boolean p1=(Boolean) m.get("Personal");
-	    	   	            	if (!p1)
-	    	   	            	{
-	    	   	            		Intent mIntent = new Intent(getBaseContext(), ViewCollabative.class);
-	    	   	            		mIntent.putExtra("k", mBundle);
-	    	   	            		startActivity(mIntent);
-	    	   	            	}
-	    	   	            	else
-	    	   	            	{
-	    	   	            		Intent mIntent = new Intent(getBaseContext(), ViewPersonal.class);
-	    	   	            		mIntent.putExtra("k", mBundle);
-	    	   	            		startActivity(mIntent);
-	    	   	            	}
-	    	   	            	
-	    	   	            	
-	    	   	            }});
+ 	    	   	            
+ 	    	   	            public void onItemClick(AdapterView<?> parent, View v, int p, long id) {
+ 	    	   	            	
+ 	    	   	    	    	 
+ 	    	   	            	
+ 	    	   	            	Bundle mBundle = new Bundle();
+ 	    	   	            	ParseObject m = List2.get(p);
+ 	    	   	            	
+ 	    	   	            	String user=(String) m.get("user");
+ 	    	   	            	String name=(String) m.get("Name");
+ 	    	   	            	//Toast.makeText(getBaseContext(), name, Toast.LENGTH_LONG).show();
+ 	    	   	            	int id1=(Integer) m.get("StoryId");
+ 	    	   	            	mBundle.putInt("id",id1 );
+ 	    	   	            	mBundle.putString("user",user);
+ 	    	   	            	mBundle.putString("name", name);
+ 	    	   	            	
+ 	    	   	            	Boolean p1=(Boolean) m.get("Personal");
+ 	    	   	            	if (!p1)
+ 	    	   	            	{
+ 	    	   	            		Intent mIntent = new Intent(getBaseContext(), ViewCollabative.class);
+ 	    	   	            		mIntent.putExtra("k", mBundle);
+ 	    	   	            		startActivity(mIntent);
+ 	    	   	            	}
+ 	    	   	            	else
+ 	    	   	            	{
+ 	    	   	            		Intent mIntent = new Intent(getBaseContext(), ViewPersonal.class);
+ 	    	   	            		mIntent.putExtra("k", mBundle);
+ 	    	   	            		startActivity(mIntent);
+ 	    	   	            	}
+ 	    	   	            	
+ 	    	   	            	
+ 	    	   	            }});
 	    	   	        
 	    	   	     final ArrayList<HashMap<String, Object>> m_data1 = new ArrayList<HashMap<String, Object>>();
 
 	 	    	    ParseQuery<ParseObject> query11 = ParseQuery.getQuery("Story");
-	 	    	    query11.whereEqualTo("entry", 0);
 	 	    	    query11.whereEqualTo("Personal", false);
+	 	    	   query11.whereEqualTo("user", value);
 	 	    	    query11.findInBackground(new FindCallback<ParseObject>() {
 	 	    	   	 @Override
 	 	    	        public void done(List<ParseObject> scoreList, ParseException e) {
@@ -208,7 +257,8 @@ import android.widget.SimpleAdapter.ViewBinder;
 	 	    	           	 m_data1.add(map2);
 	 	    	           	else
 	 	    	           	{
-	 	    	           	List.remove(k);	
+	 	    	           	x.remove();
+	 	    	          List=scoreList;
 	 	    	           	}
 	 	    	            }
 	 	    	           	 x=scoreList.iterator();
@@ -216,7 +266,7 @@ import android.widget.SimpleAdapter.ViewBinder;
 	 	    	           	    	m1.put("checked", false);
 	 	    	           	 SimpleAdapter adapter = new SimpleAdapter(Profile.this,
 	 	    	           		        m_data1,
-	 	    	           		                R.layout.storylist,
+	 	    	           		                listc,
 	 	    	           		                new String[] {"maintext", "subtext"}, 
 	 	    	           		                new int[] {R.id.StoryName, R.id.by}); 
 	 	    	           		        

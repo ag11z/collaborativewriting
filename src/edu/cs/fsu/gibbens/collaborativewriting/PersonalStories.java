@@ -10,7 +10,12 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import android.app.ListActivity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -28,10 +33,32 @@ public class PersonalStories extends ListActivity  {
 	HashMap<String, Object> map1;
 	Iterator<ParseObject> x;
 	protected List<ParseObject> List;
+	private int listc;
 	/** Called when the activity is first created. */
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    
+	    if (Main.black)
+	    {
+	    	  ListView l = getListView();
+	    	  l.setBackgroundColor(Color.BLACK);
+	    	listc=R.layout.storylistb;
+	    	int[] colors = {0xffffffff, 0xffffffff, 0xffffffff}; // red for the example
+	    	l.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	l.setDividerHeight(1);
+	    	 
+	    	
+	    }
+	    else
+	    	{
+	    	listc=R.layout.storylist;
+	    	  ListView l = getListView();
+	    	  l.setBackgroundColor(Color.WHITE);
+	    	
+	    	int[] colors = {Color.BLACK, Color.BLACK, Color.BLACK}; // red for the example
+	    	l.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	l.setDividerHeight(1);
+	    	 
+	    	}
  final ArrayList<HashMap<String, Object>> m_data = new ArrayList<HashMap<String, Object>>();
  
  ParseQuery<ParseObject> query = ParseQuery.getQuery("Story");
@@ -67,7 +94,7 @@ public class PersonalStories extends ListActivity  {
         	    	m1.put("checked", false);
         	 SimpleAdapter adapter = new SimpleAdapter(PersonalStories.this,
         		        m_data,
-        		                R.layout.storylist,
+        		                listc,
         		                new String[] {"maintext", "subtext"}, 
         		                new int[] {R.id.StoryName, R.id.by}); 
         		        
@@ -129,9 +156,93 @@ public class PersonalStories extends ListActivity  {
 	    						}
 	    						if (item.getTitle().equals("Store story"))
 	    						{
-	    							Toast.makeText(PersonalStories.this,
-		    								"You want to store but it is not implemented yet =( ",
-		    								Toast.LENGTH_SHORT).show();
+	    							
+	    							
+	    					    	
+					    		 	 
+
+	   					    		 List.get(x).getString("Name");
+	   					    		 List.get(x).getString("StoryId");
+	   					    		 ///
+	   					    		 
+	   					    		 ParseQuery<ParseObject> query = ParseQuery.getQuery("Story");
+	   					    		 query.whereEqualTo("StoryId",List.get(x).getString("StoryId"));
+	   					    		 query.whereEqualTo("Name",List.get(x).getString("Name"));
+	   					    		 query.addAscendingOrder("entry");
+	   					    		 query.addAscendingOrder("createdAt");
+	   					    		 query.findInBackground(new FindCallback<ParseObject>() {
+	   					    			private ParseObject m;
+										private Cursor mCursor;
+										private Iterator<ParseObject> y;
+
+										@Override
+										public void done(
+												java.util.List<ParseObject> objects,
+												ParseException e) 
+		    					    		 
+	   					    			 {       	
+											 String mSelectionClauses =  CwLibaray.STORY+" = ? AND "+ CwLibaray.NAME+" = ?";
+			   			  		               String[] mSelectionArgs = {""+List.get(x).getInt("StoryId"),List.get(x).getString("Name")};
+					    		           
+											  Cursor Cursorn=  getContentResolver().query(CwLibaray.CONTENT_URI,
+					    		                      null, mSelectionClauses, mSelectionArgs, null);
+					    		             if (Cursorn.getCount()==0)
+					    		             { for(int k=0; k<objects.size(); k++)
+		    					    		        	 {  
+		    					    		        	y=objects.iterator();
+		    					    		     		m=y.next();
+		    					    		     		
+		    					    		        	 ContentValues mNewValues=new ContentValues();
+		    					    		       	  mNewValues.put(CwLibaray.NAME, m.getString("Name").toString().trim());
+		    					    		              mNewValues.put(CwLibaray.ENTRY, k );
+		    					    		              mNewValues.put(CwLibaray.STORY, m.getInt("StoryId"));
+		    					    		              mNewValues.put(CwLibaray.User,m.getString("user").toString().trim());
+		    					    		              mNewValues.put(CwLibaray.PART, m.getString("Part").toString().trim());
+		    					    		              getApplication().getContentResolver().insert(
+		    					    		             	CwLibaray.CONTENT_URI, mNewValues);
+		    					    		              //mCursor=getContentResolver().query(CwLibaray.CONTENT_URI,null, null, null, null);
+		    					    		        	
+		    					    		              Toast.makeText(getBaseContext(), "Stored Story", Toast.LENGTH_LONG).show();
+		    					    		        		 mCursor=getContentResolver().query(CwLibaray.CONTENT_URI,null, null, null, null);
+		    					    		             }}
+	   					    		 else
+	   					    		 {
+	   					    			Cursorn.moveToFirst();
+	   					    			Cursorn.getString(5);
+	   					    			 String mSelectionClause =  CwLibaray.STORY+" = ?";
+	   			  		               String[] mSelectionArgs1 = {Cursorn.getString(5)};
+
+	   			  		               int mRowsDeleted = 0;
+
+	   			  		               mRowsDeleted = getContentResolver().delete(
+	   			  		               		CwLibaray.CONTENT_URI,
+	   			  		                        mSelectionClause,
+	   			  		                       mSelectionArgs1
+	   			  		                     
+	   			  		                       );
+	   			  		          for(int k=0; k<objects.size(); k++)
+			    		        	 {  
+			    		        	y=objects.iterator();
+			    		     		m=y.next();
+			    		     		
+			    		        	 ContentValues mNewValues=new ContentValues();
+			    		       	  mNewValues.put(CwLibaray.NAME, m.getString("Name").toString().trim());
+			    		              mNewValues.put(CwLibaray.ENTRY, k );
+			    		              mNewValues.put(CwLibaray.STORY, m.getInt("StoryId"));
+			    		              mNewValues.put(CwLibaray.User,m.getString("user").toString().trim());
+			    		              mNewValues.put(CwLibaray.PART, m.getString("Part").toString().trim());
+			    		              getApplication().getContentResolver().insert(
+			    		             	CwLibaray.CONTENT_URI, mNewValues);
+			    		              //mCursor=getContentResolver().query(CwLibaray.CONTENT_URI,null, null, null, null);
+			    		        	
+			    		        		
+			    		        		 mCursor=getContentResolver().query(CwLibaray.CONTENT_URI,null, null, null, null);
+			    		             }
+	   			  		               Toast.makeText(getBaseContext(), "Stored Story", Toast.LENGTH_LONG).show();
+	   					    		 }
+	   					    			 
+	   					    			 }});		        	 
+	    						
 	    						}
 	    						return true;
 	    					}
@@ -166,7 +277,7 @@ public class PersonalStories extends ListActivity  {
 	        
 	        final SimpleAdapter adapter = new SimpleAdapter(PersonalStories.this,
 	        m_data,
-	                R.layout.storylist,
+	                listc,
 	                new String[] {"maintext", "subtext"}, 
 	                new int[] {R.id.StoryName, R.id.by}); 
 	        

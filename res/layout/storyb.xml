@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:background="#000000" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:background="#000000" >
+
+        <TableRow android:layout_marginRight="2sp" android:layout_marginTop="5sp">
+
+            <TextView
+                android:id="@+id/N"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+              android:layout_weight="3"
+              android:textColor="#ffffff"
+                 android:textSize="18sp"
+                android:text="Story Name:" />
+
+            
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                 android:singleLine="true"
+                 android:background="#eee9e9"
+                android:ems="10"
+                android:inputType="text" >
+            </EditText>
+        </TableRow>
+
+        <TableRow android:layout_marginTop="5sp">
+  <TextView
+                android:id="@+id/T"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="80dp"
+                android:textColor="#ffffff"
+                   android:textSize="18sp"
+                android:text="Story Type:" /> 
+  </TableRow>
+
+        <TableRow android:layout_marginTop="5sp"
+            android:gravity="right">
+               <RadioGroup
+                   
+                android:id="@+id/radioGroup1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/radio0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:textColor="#ffffff"
+                    android:text="Personal" />
+
+                <RadioButton
+                    android:id="@+id/radio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="Collaborative " />
+
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text=" Collaborative with deleting" />
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow android:layout_marginTop="5sp"> 
+            <TextView
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="80dp"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:text="Start story:" />
+            
+             </TableRow>
+
+        <TableRow android:gravity="center">
+
+            <EditText 
+                android:gravity="left|top"
+                android:id="@+id/story"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:ems="10"
+              
+                 android:background="#eee9e9"
+                 android:singleLine="false"
+                android:inputType="textMultiLine" 
+            />
+</TableRow>
+
+        <TableRow android:gravity="center"  android:layout_marginTop="5sp">
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="Submit" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

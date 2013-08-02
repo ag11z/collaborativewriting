@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     android:screenOrientation="portrait" >
+<TableRow>
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_weight="6"
+        android:text="@string/large"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:id="@+id/refresh"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh" 
+        android:visibility="gone"/>
+
+</TableRow>
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Medium Text"
+        android:clickable="true"
+         android:textColor="#0000FF"
+        />
+
+    <ListView
+        android:id="@+id/entries"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" >
+    </ListView>
+
+    <SlidingDrawer
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:allowSingleTap="true"
+        android:content="@+id/content"
+        android:handle="@+id/handle" >
+
+        <Button
+            android:id="@+id/handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add on to the Story" />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5sp" >
+
+            <EditText
+                android:id="@+id/newentry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="#eee9e9"
+                android:ems="10"
+                android:gravity="left|top"
+                android:inputType="textMultiLine" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add" />
+        </LinearLayout>
+    </SlidingDrawer>
+
+</TableLayout>

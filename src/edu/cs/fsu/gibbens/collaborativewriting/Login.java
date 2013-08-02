@@ -21,6 +21,9 @@ public class Login extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+	    if (Main.black)
+	    	 setContentView(R.layout.tableb);	
+	    else
 	    setContentView(R.layout.table);
 	    Button Submit = (Button) findViewById(R.id.submit);
 		 

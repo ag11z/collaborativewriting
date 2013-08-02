@@ -18,6 +18,9 @@ public class Forgot extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+	    if (Main.black)
+	        setContentView(R.layout.forgotb);
+	    else
 	    setContentView(R.layout.forgot);
 	    Button Submit = (Button) findViewById(R.id.submit1);
 		 

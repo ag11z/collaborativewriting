@@ -21,6 +21,9 @@ int l; int random;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+	    if(Main.black)
+	    	 setContentView(R.layout.storyb);
+	    else
 	    setContentView(R.layout.story);
 	    Button Submit = (Button) findViewById(R.id.submit);
 		 

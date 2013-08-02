@@ -25,6 +25,9 @@ public class Change extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+	    if(Main.black)
+	    	  setContentView(R.layout.changeb);
+	    else
 	    setContentView(R.layout.change1);
 	    Button ClearButton = (Button) findViewById(R.id.clear);
 		  Button SubmitButton = (Button) findViewById(R.id.submit);

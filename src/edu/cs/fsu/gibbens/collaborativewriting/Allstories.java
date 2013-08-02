@@ -9,17 +9,30 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import android.app.ListActivity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SimpleAdapter;
+import android.widget.SlidingDrawer;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.SimpleAdapter.ViewBinder;
@@ -28,11 +41,52 @@ import android.widget.Toast;
 public class Allstories extends ListActivity  {
 	HashMap<String, Object> map1;
 	Iterator<ParseObject> x;
+	int listc;
+	private Iterator<ParseObject> y;
+	
+	Uri mNewUri;
+	Cursor mCursor;
 	protected List<ParseObject> List;
 	/** Called when the activity is first created. */
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    
+	    if (Main.black)
+	    {
+	    	  ListView l = getListView();
+	    	  l.setBackgroundColor(Color.BLACK);
+	    	listc=R.layout.storylistb;
+	    	int[] colors = {0xffffffff, 0xffffffff, 0xffffffff}; // red for the example
+	    	l.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	l.setDividerHeight(1);
+	    	 
+	    	
+	    }
+	    else
+	    	{
+	    	listc=R.layout.storylist;
+	    	  ListView l = getListView();
+	    	  l.setBackgroundColor(Color.WHITE);
+	    	
+	    	int[] colors = {Color.BLACK, Color.BLACK, Color.BLACK}; // red for the example
+	    	l.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	l.setDividerHeight(1);
+	    	 
+	    	}
+	    mCursor =getContentResolver().query(CwLibaray.CONTENT_URI,null, null, null, null);
+	   // Toast.makeText(getBaseContext(),""+mCursor.getCount(), Toast.LENGTH_LONG).show();
+	   /* ContentValues mNewValue = new ContentValues();
+		l
+		 
+	
+	  mNewValue.put(CwLibaray.NAME, "Name".trim());
+       mNewValue.put(CwLibaray.ENTRY, 0 );
+       mNewValue.put(CwLibaray.STORY, 0);
+       mNewValue.put(CwLibaray.User,"user".trim());
+       mNewValue.put(CwLibaray.PART,"Part".trim());
+       getContentResolver().insert(
+      	CwLibaray.CONTENT_URI, mNewValue);*/
+       mCursor=getContentResolver().query(CwLibaray.CONTENT_URI,null, null, null, null);
+       //Toast.makeText(getBaseContext(),""+mCursor.getCount(), Toast.LENGTH_LONG).show();
  final ArrayList<HashMap<String, Object>> m_data = new ArrayList<HashMap<String, Object>>();
  
  ParseQuery<ParseObject> query = ParseQuery.getQuery("Story");
@@ -67,7 +121,7 @@ public class Allstories extends ListActivity  {
         	    	m1.put("checked", false);
         	 SimpleAdapter adapter = new SimpleAdapter(Allstories.this,
         		        m_data,
-        		                R.layout.storylist,
+        		                listc,
         		                new String[] {"maintext", "subtext"}, 
         		                new int[] {R.id.StoryName, R.id.by}); 
         		        
@@ -99,7 +153,7 @@ public class Allstories extends ListActivity  {
                     int p, long arg3) {
             	//Toast.makeText(getBaseContext(), "Error failed to delete", Toast.LENGTH_LONG).show();
 	    			 final int x=p;
-	    			 if(List.size()>=2){
+	    			 if(List.size()>=1){
 	    		
 	    				//Toast.makeText(getBaseContext(), "Error failed to delete", Toast.LENGTH_LONG).show();
 	    				ListView l =(ListView) findViewById(R.id.entries);
@@ -130,13 +184,102 @@ public class Allstories extends ListActivity  {
 	    						}
 	    						if (item.getTitle().equals("Store story"))
 	    						{
-	    							Toast.makeText(Allstories.this,
-		    								"You want to store but it is not implemented yet =( ",
-		    								Toast.LENGTH_SHORT).show();
+	    							
+	    					    	
+	    					    		 	 
+
+   					    		 List.get(x).getString("Name");
+   					    		 List.get(x).getString("StoryId");
+   					    		 ///
+   					    		 
+   					    		 ParseQuery<ParseObject> query = ParseQuery.getQuery("Story");
+   					    		 query.whereEqualTo("StoryId",List.get(x).getString("StoryId"));
+   					    		 query.whereEqualTo("Name",List.get(x).getString("Name"));
+   					    		 query.addAscendingOrder("entry");
+   					    		 query.addAscendingOrder("createdAt");
+   					    		 query.findInBackground(new FindCallback<ParseObject>() {
+   					    			private ParseObject m;
+
+									@Override
+									public void done(
+											java.util.List<ParseObject> objects,
+											ParseException e) 
+	    					    		 
+   					    			 {       	
+										 String mSelectionClauses =  CwLibaray.STORY+" = ? AND "+ CwLibaray.NAME+" = ?";
+		   			  		               String[] mSelectionArgs = {""+List.get(x).getInt("StoryId"),List.get(x).getString("Name")};
+				    		           
+										  Cursor Cursorn=  getContentResolver().query(CwLibaray.CONTENT_URI,
+				    		                      null, mSelectionClauses, mSelectionArgs, null);
+				    		             if (Cursorn.getCount()==0)
+				    		             { 
+				    		            	 y=objects.iterator();
+				    		            	 for(int k=0; k<objects.size(); k++)
+	    					    		        	 {  
+	    					    		        	
+	    					    		     		m=y.next();
+	    					    		     		
+	    					    		        	 ContentValues mNewValues=new ContentValues();
+	    					    		       	  mNewValues.put(CwLibaray.NAME, m.getString("Name").toString().trim());
+	    					    		              mNewValues.put(CwLibaray.ENTRY, k );
+	    					    		              mNewValues.put(CwLibaray.STORY, m.getInt("StoryId"));
+	    					    		              mNewValues.put(CwLibaray.User,m.getString("user").toString().trim());
+	    					    		              mNewValues.put(CwLibaray.PART, m.getString("Part").toString().trim());
+	    					    		              getApplication().getContentResolver().insert(
+	    					    		             	CwLibaray.CONTENT_URI, mNewValues);
+	    					    		              //mCursor=getContentResolver().query(CwLibaray.CONTENT_URI,null, null, null, null);
+	    					    		        	
+	    					    		              Toast.makeText(getBaseContext(), "Stored Story", Toast.LENGTH_LONG).show();
+	    					    		        		 mCursor=getContentResolver().query(CwLibaray.CONTENT_URI,null, null, null, null);
+	    					    		             }}
+   					    		 else
+   					    		 {
+   					    			Cursorn.moveToFirst();
+   					    			Cursorn.getString(5);
+   					    			 String mSelectionClause =  CwLibaray.STORY+" = ?";
+   			  		               String[] mSelectionArgs1 = {Cursorn.getString(5)};
+
+   			  		               int mRowsDeleted = 0;
+
+   			  		               mRowsDeleted = getContentResolver().delete(
+   			  		               		CwLibaray.CONTENT_URI,
+   			  		                        mSelectionClause,
+   			  		                       mSelectionArgs1
+   			  		                     
+   			  		                       );
+   			  		          y=objects.iterator();
+   			  		          for(int k=0; k<objects.size(); k++)
+		    		        	 {  
+		    		        	
+		    		     		m=y.next();
+		    		     		
+		    		        	 ContentValues mNewValues=new ContentValues();
+		    		       	  mNewValues.put(CwLibaray.NAME, m.getString("Name").toString().trim());
+		    		              mNewValues.put(CwLibaray.ENTRY, k );
+		    		              mNewValues.put(CwLibaray.STORY, m.getInt("StoryId"));
+		    		              mNewValues.put(CwLibaray.User,m.getString("user").toString().trim());
+		    		              mNewValues.put(CwLibaray.PART, m.getString("Part").toString().trim());
+		    		              getApplication().getContentResolver().insert(
+		    		             	CwLibaray.CONTENT_URI, mNewValues);
+		    		              //mCursor=getContentResolver().query(CwLibaray.CONTENT_URI,null, null, null, null);
+		    		        	
+		    		        		
+		    		        		 mCursor=getContentResolver().query(CwLibaray.CONTENT_URI,null, null, null, null);
+		    		             }
+   			  		               Toast.makeText(getBaseContext(), "Stored Story", Toast.LENGTH_LONG).show();
+   					    		 }
+   					    			 
+	    					    		        	 }
+
+									
+	    					    		        	 });
+   					    		
+	    						
+	    					    	
+	    						
 	    						}
-	    						return true;
-	    					}
-	    				});
+								return true;}}
+	    					);
 
 	    				popup.show();
 		  			
@@ -161,13 +304,13 @@ public class Allstories extends ListActivity  {
 	      //end init data
 	        
 	        
-	        
+	         
 	       
 	        
 	        
 	        final SimpleAdapter adapter = new SimpleAdapter(Allstories.this,
 	        m_data,
-	                R.layout.storylist,
+	        listc,
 	                new String[] {"maintext", "subtext"}, 
 	                new int[] {R.id.StoryName, R.id.by}); 
 	        

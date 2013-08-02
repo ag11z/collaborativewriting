@@ -13,6 +13,9 @@ import com.parse.ParseUser;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -35,12 +38,46 @@ import android.widget.SlidingDrawer.OnDrawerOpenListener;
 @SuppressWarnings("deprecation")
 public class ViewPersonal extends Activity {
 
+	private int listc;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.viewstory);
+	    if (Main.black)
+	    {
+	    	setContentView(R.layout.viewstory);
+	    	
+	    }
+	    else
+	    {
+	    setContentView(R.layout.viewstoryb);
+	    
+	    }
+	    if (Main.black)
+	    {
+	    	  ListView l =(ListView) findViewById(R.id.entries);
+	    	  l.setBackgroundColor(Color.BLACK);
+	    	listc=R.layout.storyviewlistb;
+	    	int[] colors = {0xffffffff, 0xffffffff, 0xffffffff}; // red for the example
+	    	l.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	l.setDividerHeight(1);
+	    	 
+	    	
+	    }
+	    else
+	    	{
+	    	listc=R.layout.storyviewlist;
+	    	 ListView l =(ListView) findViewById(R.id.entries);
+	    	  l.setBackgroundColor(Color.WHITE);
+	    	
+	    	int[] colors = {Color.BLACK, Color.BLACK, Color.BLACK}; // red for the example
+	    	l.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	l.setDividerHeight(1);
+	    	 
+	    	}
 	    TextView n =(TextView) findViewById(R.id.name);
+	    
 	  
 	    
 	   String value = getIntent().getExtras().getBundle("k").getString("name");
@@ -54,9 +91,11 @@ public class ViewPersonal extends Activity {
 	   drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 	   @Override
 	   public void onDrawerOpened() {
-	   // TODO Auto-generated method stub
 		   Button button=(Button)findViewById(R.id.handle);
-	   button.setText("Close");
+		  // button.setText("");
+		   button.setBackgroundColor(Color.WHITE);
+		   button.setClickable(false);
+		   button.setEnabled(false);
 	   }
 	   });
 	   drawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
@@ -64,7 +103,9 @@ public class ViewPersonal extends Activity {
 	   public void onDrawerClosed() {
 	   // TODO Auto-generated method stub
 		   Button button=(Button)findViewById(R.id.handle);
-	   button.setText("Edit");
+		   // TODO Auto-generated method stub
+		   
+		   button.setVisibility(View.VISIBLE);
 	   }
 	   });
 	   
@@ -139,7 +180,7 @@ query.findInBackground(new FindCallback<ParseObject>() {
        	    	m1.put("checked", false);
        	 SimpleAdapter adapter = new SimpleAdapter(ViewPersonal.this,
        		        m_data,
-       		                R.layout.storyviewlist,
+       		                listc,
        		                new String[] {"maintext", "subtext"}, 
        		                new int[] {R.id.StoryName, R.id.by}); 
        		        

@@ -10,32 +10,59 @@ import com.parse.ParseUser;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Main extends Activity {
-static boolean login=false;
+static boolean login=false; static boolean black=true;
+public static boolean hide;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-   
+        ListView i = (ListView) findViewById(R.id.mainmenu);
+        i.setOnItemClickListener(item);
+        if (black){
+	        	ListView i1 = (ListView) findViewById(R.id.mainmenu);
+	     	   String[] list = getResources().getStringArray(R.array.List);
+	            //Row layout defined by Android: android.R.layout.simple_list_item_1
+	     	   
+	            i1.setAdapter(new ArrayAdapter<String>(Main.this ,  R.layout.list_simple,R.id.listTextView, list));
+	           RelativeLayout r =(RelativeLayout)findViewById(R.id.mainu);
+	           r.setBackgroundColor(Color.BLACK);
+	          i1.setBackgroundColor(Color.WHITE);
+	          }
+	        	else
+	        	{
+	        		ListView i1 = (ListView) findViewById(R.id.mainmenu);
+	 	     	   String[] list = getResources().getStringArray(R.array.List);
+	 	            //Row layout defined by Android: android.R.layout.simple_list_item_1
+	 	     	   
+	 	            i1.setAdapter(new ArrayAdapter<String>(Main.this ,  R.layout.list_simple2,R.id.listTextView, list));
+	 	           RelativeLayout r =(RelativeLayout)findViewById(R.id.mainu);
+	 	           r.setBackgroundColor(Color.WHITE);
+	 	          
+	        	}
             Parse.initialize(this, "qFPogmgvOJTbkV2QNsIsUgqYlhtp1go6BApXM1m1", "9NlDvnUSqknpt8DTMpGZoqrBM3gEEBBfBIR8i8oq");
-         ListView i = (ListView) findViewById(R.id.mainmenu);
          
-    i.setOnItemClickListener(item);
+         
+    
         	
     }
     public  void logged()
     {ListView i = (ListView) findViewById(R.id.mainmenu);
 	   String[] list = getResources().getStringArray(R.array.List2);
        //Row layout defined by Android: android.R.layout.simple_list_item_1
-       i.setAdapter(new ArrayAdapter<String>(null, android.R.layout.simple_list_item_1, list));}
+       i.setAdapter(new ArrayAdapter<String>(null, R.layout.list_simple,R.id.listTextView, list));}
+    
     private OnItemClickListener item = new OnItemClickListener(){
 
        
@@ -56,14 +83,40 @@ static boolean login=false;
 	   Main.login=false;
 	   
 	   ParseUser.logOut();  
-	   ListView i = (ListView) findViewById(R.id.mainmenu);
-  	   String[] list = getResources().getStringArray(R.array.List);
-         //Row layout defined by Android: android.R.layout.simple_list_item_1
-         i.setAdapter(new ArrayAdapter<String>(Main.this , android.R.layout.simple_list_item_1, list));
+	   if (black){
+        	ListView i = (ListView) findViewById(R.id.mainmenu);
+     	   String[] list = getResources().getStringArray(R.array.List);
+            //Row layout defined by Android: android.R.layout.simple_list_item_1
+     	   
+            i.setAdapter(new ArrayAdapter<String>(Main.this ,  R.layout.list_simple,R.id.listTextView, list));
+           RelativeLayout r =(RelativeLayout)findViewById(R.id.mainu);
+           r.setBackgroundColor(Color.BLACK);
+          i.setBackgroundColor(Color.WHITE);
+          }
+        	else
+        	{
+        		ListView i = (ListView) findViewById(R.id.mainmenu);
+ 	     	   String[] list = getResources().getStringArray(R.array.List);
+ 	            //Row layout defined by Android: android.R.layout.simple_list_item_1
+ 	     	   
+ 	            i.setAdapter(new ArrayAdapter<String>(Main.this ,  R.layout.list_simple2,R.id.listTextView, list));
+ 	           RelativeLayout r =(RelativeLayout)findViewById(R.id.mainu);
+ 	           r.setBackgroundColor(Color.WHITE);
+ 	          
+        	}
     	   
        }
+  
  }
-       
+ if (p==1)
+     
+ {
+	 
+	 
+	 Intent intObjx = new Intent(Main.this,LibarayList.class);
+	
+	startActivity(intObjx);
+	} 
       if (p==2)
       
       {
@@ -121,7 +174,8 @@ static boolean login=false;
       {
       	if (login==false)
       	{
-            
+      	  Intent intObj = new Intent(Main.this,Settings.class);
+          Main.this.startActivityForResult(intObj, 4);
 	    }
       	else
       	{
@@ -139,6 +193,9 @@ static boolean login=false;
               Intent intObjx = new Intent(Main.this,Create.class);
 	    		
 	    		startActivity(intObjx);}
+        	else{
+        		Intent intObj = new Intent(Main.this,Settings.class);
+            Main.this.startActivityForResult(intObj, 4);}
         }
         if (p==7)
         {
@@ -164,13 +221,65 @@ static boolean login=false;
  	    if (requestCode == 1) {
  	        // Make sure the request was successful
  	        if (resultCode == RESULT_OK) {
+ 	        	if (black){
  	        	ListView i = (ListView) findViewById(R.id.mainmenu);
  	     	   String[] list = getResources().getStringArray(R.array.List2);
  	            //Row layout defined by Android: android.R.layout.simple_list_item_1
- 	            i.setAdapter(new ArrayAdapter<String>(Main.this , android.R.layout.simple_list_item_1, list));
- 	           
+ 	     	   
+ 	            i.setAdapter(new ArrayAdapter<String>(Main.this ,  R.layout.list_simple,R.id.listTextView, list));
+ 	           RelativeLayout r =(RelativeLayout)findViewById(R.id.mainu);
+ 	           r.setBackgroundColor(Color.BLACK);
+ 	          i.setBackgroundColor(Color.WHITE);
+ 	          }
+ 	        	else
+ 	        	{
+ 	        		ListView i = (ListView) findViewById(R.id.mainmenu);
+ 	 	     	   String[] list = getResources().getStringArray(R.array.List2);
+ 	 	            //Row layout defined by Android: android.R.layout.simple_list_item_1
+ 	 	     	   
+ 	 	            i.setAdapter(new ArrayAdapter<String>(Main.this ,  R.layout.list_simple2,R.id.listTextView, list));
+ 	 	           RelativeLayout r =(RelativeLayout)findViewById(R.id.mainu);
+ 	 	           r.setBackgroundColor(Color.WHITE);
+ 	 	          
+ 	        	}
  	        	
- 	        }}};
+ 	        }}
+ 	       if (requestCode == 4) {
+ 	 	        // Make sure the request was successful
+ 	 	        if (resultCode == RESULT_OK) {
+ 	 	        	if (black){
+ 	 	        	ListView i = (ListView) findViewById(R.id.mainmenu);
+ 	 	        	String[] list2;
+ 	 	        	if(login)
+ 	 	     	   list2 = getResources().getStringArray(R.array.List2);
+ 	 	        	else
+ 	 	        		 list2 = getResources().getStringArray(R.array.List);
+ 	 	            //Row layout defined by Android: android.R.layout.simple_list_item_1
+ 	 	     	   
+ 	 	            i.setAdapter(new ArrayAdapter<String>(Main.this ,  R.layout.list_simple,R.id.listTextView, list2));
+ 	 	           RelativeLayout r =(RelativeLayout)findViewById(R.id.mainu);
+ 	 	           r.setBackgroundColor(Color.BLACK);
+ 	 	          i.setBackgroundColor(Color.WHITE);
+ 	 	          }
+ 	 	        	else
+ 	 	        	{
+ 	 	        		ListView i = (ListView) findViewById(R.id.mainmenu);
+ 	 	 	     	   String[] list = getResources().getStringArray(R.array.List2);
+ 	 	 	            //Row layout defined by Android: android.R.layout.simple_list_item_1
+ 	 	 	     	String[] list2;
+ 	 	        	if(login)
+ 	 	     	   list2 = getResources().getStringArray(R.array.List2);
+ 	 	        	else
+ 	 	        		 list2 = getResources().getStringArray(R.array.List);
+ 	 	 	     	   
+ 	 	 	            i.setAdapter(new ArrayAdapter<String>(Main.this ,  R.layout.list_simple2,R.id.listTextView, list2));
+ 	 	 	           RelativeLayout r =(RelativeLayout)findViewById(R.id.mainu);
+ 	 	 	           r.setBackgroundColor(Color.WHITE);
+ 	 	 	          
+ 	 	        	}
+ 	 	        	
+ 	 	        }
+ 	    }};
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

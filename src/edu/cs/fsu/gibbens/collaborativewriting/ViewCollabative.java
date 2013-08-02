@@ -20,6 +20,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +42,8 @@ import android.widget.SimpleAdapter.ViewBinder;
 
 public class ViewCollabative extends Activity {
 
+	private int listc;
+
 	/** Called when the activity is first created. */
 	@SuppressWarnings("deprecation")
 	@Override
@@ -47,11 +52,48 @@ public class ViewCollabative extends Activity {
 	    setContentView(R.layout.viewstory);
 	    TextView n =(TextView) findViewById(R.id.name);
 	    TextView a =(TextView) findViewById(R.id.author);
-	   
+	    String value = getIntent().getExtras().getBundle("k").getString("name");
+		  a.setVisibility(View.GONE);
+		   n.setText(value);
+	    if (Main.black)
+	    {
+	    	setContentView(R.layout.viewstory);
+	    	
+	    }
+	    else
+	    {
+	    setContentView(R.layout.viewstoryb);
 	    
-	   String value = getIntent().getExtras().getBundle("k").getString("name");
-	  a.setVisibility(View.GONE);
-	   n.setText(value);
+	    }
+	    if (Main.black)
+	    {
+	    	  ListView l =(ListView) findViewById(R.id.entries);
+	    	  l.setBackgroundColor(Color.BLACK);
+	    	listc=R.layout.storyviewlistb;
+	    	int[] colors = {0xffffffff, 0xffffffff, 0xffffffff}; // red for the example
+	    	l.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	l.setDividerHeight(1);
+	    	
+	  		  a.setVisibility(View.GONE);
+	  		   n.setText(value);
+	    	
+	    }
+	    else
+	    	{
+	    	listc=R.layout.storyviewlist;
+	    	 ListView l =(ListView) findViewById(R.id.entries);
+	    	  l.setBackgroundColor(Color.WHITE);
+	    	
+	    	int[] colors = {Color.BLACK, Color.BLACK, Color.BLACK}; // red for the example
+	    	l.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+	    	l.setDividerHeight(1);
+	    	
+	  	
+	  		  a.setVisibility(View.GONE);
+	  		   n.setText(value);
+	    	}
+	    
+	 
 	  
 	   int id = getIntent().getExtras().getBundle("k").getInt("id"); 
 	   
@@ -62,7 +104,10 @@ public class ViewCollabative extends Activity {
 	   public void onDrawerOpened() {
 	   // TODO Auto-generated method stub
 		   Button button=(Button)findViewById(R.id.handle);
-	   button.setText("Close");
+		   button.setBackgroundColor(Color.WHITE);
+		   button.setClickable(false);
+		   button.setEnabled(false);
+	   //button.setVisibility(View.GONE);
 	   }
 	   });
 	   drawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
@@ -71,6 +116,7 @@ public class ViewCollabative extends Activity {
 	   // TODO Auto-generated method stub
 		   Button button=(Button)findViewById(R.id.handle);
 	   button.setText("Edit");
+	 
 	   }
 	   });
 	   
@@ -110,6 +156,8 @@ query.findInBackground(new FindCallback<ParseObject>() {
        		a="By : "+(String) m.get("user"); 
        	 else
        		 a="";
+       	 if (Main.hide)
+       		 a="";
        	map1 = new HashMap<String, Object>();
        	 map1.put("maintext", s);
        	 map1.put("subtext", a);        
@@ -121,7 +169,7 @@ query.findInBackground(new FindCallback<ParseObject>() {
        	    	m1.put("checked", false);
        	 SimpleAdapter adapter = new SimpleAdapter(ViewCollabative.this,
        		        m_data,
-       		                R.layout.storyviewlist,
+       		                listc,
        		                new String[] {"maintext", "subtext"}, 
        		                new int[] {R.id.StoryName, R.id.by}); 
        		        
@@ -141,6 +189,11 @@ query.findInBackground(new FindCallback<ParseObject>() {
        		});
        		     ListView l =(ListView) findViewById(R.id.entries);
        	 l.setAdapter(adapter);
+         TextView n =(TextView) findViewById(R.id.name);
+ 	    TextView a1 =(TextView) findViewById(R.id.author);
+ 	    String value = getIntent().getExtras().getBundle("k").getString("name");
+ 		  a1.setVisibility(View.GONE);
+ 		   n.setText(value);
             Log.i("score", "Retrieved "  + " scores");
         } else {
             Log.i("score", "Error: " + e.getMessage());

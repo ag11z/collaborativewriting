@@ -7,13 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <TableRow>
+        <TableRow android:layout_marginRight="2sp" android:layout_marginTop="5sp">
 
             <TextView
                 android:id="@+id/N"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="80dp"
+              android:layout_weight="3"
+                 android:textSize="18sp"
                 android:text="Story Name:" />
 
             
@@ -22,21 +23,25 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                 android:singleLine="true"
+                 android:background="#eee9e9"
                 android:ems="10"
                 android:inputType="text" >
             </EditText>
         </TableRow>
 
-        <TableRow>
+        <TableRow android:layout_marginTop="5sp">
   <TextView
                 android:id="@+id/T"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="80dp"
+                   android:textSize="18sp"
                 android:text="Story Type:" /> 
   </TableRow>
 
-        <TableRow
+        <TableRow android:layout_marginTop="5sp"
             android:gravity="right">
                <RadioGroup
                    
@@ -65,29 +70,33 @@
             </RadioGroup>
         </TableRow>
 
-        <TableRow> 
+        <TableRow android:layout_marginTop="5sp"> 
             <TextView
                 android:id="@+id/start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="80dp"
+                android:textSize="18sp"
                 android:text="Start story:" />
             
              </TableRow>
 
-        <TableRow >
+        <TableRow android:gravity="center">
 
             <EditText 
-                android:gravity="center"
+                android:gravity="left|top"
                 android:id="@+id/story"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:ems="10"
+              
+                 android:background="#eee9e9"
+                 android:singleLine="false"
                 android:inputType="textMultiLine" 
             />
 </TableRow>
 
-        <TableRow android:gravity="center" >
+        <TableRow android:gravity="center"  android:layout_marginTop="5sp">
             <Button
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"

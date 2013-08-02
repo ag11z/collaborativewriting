@@ -19,8 +19,10 @@ import android.widget.Toast;
 	    @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.logintable);
-	        
+	        if (Main.black)
+	        setContentView(R.layout.logintableb);
+	        else
+	        	setContentView(R.layout.logintable);
 	  Button ClearButton = (Button) findViewById(R.id.clear);
 	  Button SubmitButton = (Button) findViewById(R.id.submit);
 	 

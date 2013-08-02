@@ -25,5 +25,7 @@
         <item >Change Account Info</item>
     </string-array>
         <string name="large">Large</string>
-
+	<string name="authority">edu.cs.fsu.gibbens.collaborativewriting.provider</string>
+ <string name="read_permission">edu.cs.fsu.gibbens.collaborativewriting.provider.permission.READ_PERMISSION</string>
+ <string name="write_permission">edu.cs.fsu.gibbens.collaborativewriting.provider.permission.WRITE_PERMISSION</string>
 </resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+         android:background="#000000"
+        android:layout_height="match_parent" >
+<TableLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/large"
+        android:textColor="#ffffff"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+ 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+             android:background="#000000" >
+        </LinearLayout>
+   
+
+    <TextView
+        android:id="@+id/aboutme"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Medium Text"
+        android:textColor="#ffffff"
+        android:clickable="true"
+        />
+  <TextView
+        android:id="@+id/pwritten"
+        android:layout_width="wrap_content"
+        android:textColor="#ffffff"
+        android:layout_height="30dp"
+        android:text="Personal stories I've written:"
+        
+         
+        />
+
+  <ListView
+      android:id="@+id/pstories"
+      android:layout_width="match_parent"
+      android:layout_height="168dp"
+       >
+  </ListView>
+
+ <TextView
+        android:id="@+id/pwritten"
+        android:layout_width="wrap_content"
+        android:textColor="#ffffff"
+        android:layout_height="30dp"
+        android:text="Collaborative stories I've worked on:"
+        
+         
+        />
+
+ <ListView
+     android:id="@+id/cstories"
+     android:layout_width="match_parent"
+     android:layout_height="157dp" 
+    >
+ 
+ </ListView>
+ 
+ </TableLayout>
+ </ScrollView>
+
